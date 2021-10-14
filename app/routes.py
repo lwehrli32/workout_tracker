@@ -9,6 +9,12 @@ from app.workout_en import txt
 	Takes care of all the routes and pages in the website
 '''
 
+@app.errorhandler(404)
+def page_not_found(e):
+
+    # note that we set the 404 status explicitly
+    return render_template('404_not_found.html'), 404
+
 # code for logic on home page
 @app.route("/")
 @app.route("/home")

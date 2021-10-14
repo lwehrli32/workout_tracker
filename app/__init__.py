@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
 # initialization of app
+
 app = Flask(__name__)
 
 # config variables
@@ -23,5 +24,8 @@ login_manager = LoginManager(app)
 # trying to view pages that they need to be logged in to use
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
+
+from app.routes import page_not_found
+app.register_error_handler(404, page_not_found)
 
 from app import routes
