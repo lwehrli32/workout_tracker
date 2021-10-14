@@ -4,7 +4,8 @@ from app.forms import *
 from app.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 from app.constants.workout_en import txt
-from workout.workout_manager import *
+from app.users.user_manager import user_manager
+from app.workout.workout_manager import *
 
 '''
     Takes care of all the routes and pages in the website
@@ -188,8 +189,8 @@ def newWorkout():
 @login_required
 def history():
 
-    history = []
+    user_manager = user_manager()
 
-    workout_manager = workout_manager()
+    workout_manager = workout.workout_manager()
 
     return render_template('history.html', title='History', history=history)
