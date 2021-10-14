@@ -1,0 +1,3 @@
+Workout Tracker
+
+Server using flask that you can track your workouts. You are able to create new workouts, view old workouts, and see your progress over time.
