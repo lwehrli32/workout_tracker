@@ -77,6 +77,8 @@ def register():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 
+	app.logger.info('Start of login')
+
 	# redirects user to home page if they are logged in
 	if current_user.is_authenticated:
 		return redirect(url_for('home'))
@@ -160,6 +162,9 @@ def account():
 @app.route("/newWorkout", methods=['GET', 'POST'])
 @login_required
 def newWorkout():
+
+	app.logger.info('Start of newWorkout')
+
 	# create workout
 	form = NewWorkout()
 
