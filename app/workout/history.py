@@ -1,11 +1,7 @@
+from app.models import Workout
 
-class history():
-    
-    def __init__(self):
-        pass
+def get_history_list(current_user):
+    user_id = current_user.id
+    workouts = Workout.query.filter_by(user_id=user_id)
+    return workouts
 
-    def add_user(self):
-        return None
-
-    def get_user(self):
-        return None

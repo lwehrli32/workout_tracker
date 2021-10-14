@@ -2,10 +2,11 @@ from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
 from app.forms import *
 from app.models import User
+from app.workout.manager import Workout_Manager, Workout
+from app.workout.history import *
 from flask_login import login_user, current_user, logout_user, login_required
 from app.constants.workout_en import txt
-from app.users.user_manager import user_manager
-from app.workout.workout_manager import *
+
 
 '''
     Takes care of all the routes and pages in the website
@@ -27,21 +28,9 @@ def home():
     # TODO get workouts
 
     workouts = []
-    temp_workout = {
-        "title": "Arms",
-        "date": "1/1/2021",
-        "partners": "Donny",
-        "location": "Nic",
-        "num_sets": "10",
-        "duration": "2 hours"
-    }
-    workouts.append(temp_workout)
-    workouts.append(temp_workout)
-    workouts.append(temp_workout)
-    workouts.append(temp_workout)
-    workouts.append(temp_workout)
-    workouts.append(temp_workout)
-    workouts.append(temp_workout)
+    wm = Workout_Manager(current_user.id)
+
+    workouts = Workout_Manager.get_workouts(current_user.id)
 
     return render_template('home.html', title='Home', workouts=workouts, newWorkoutTxt=txt["New Workout"])
 
@@ -177,6 +166,10 @@ def newWorkout():
     form = NewWorkout()
 
     if form.validate_on_submit():
+
+
+
+        workout = Workout()
         flash('New workout created!', 'success')
         return redirect(url_for('home'))
 
@@ -184,13 +177,8 @@ def newWorkout():
     return render_template('newWorkout.html', title='New Workout', form=form)
 
 
-# logic on history page
 @app.route("/history")
 @login_required
 def history():
-
-    user_manager = user_manager()
-
-    workout_manager = workout.workout_manager()
-
-    return render_template('history.html', title='History', history=history)
+    past_history = get_history_list(current_user)
+    return render_template('history.html', title='History', history=past_history)

@@ -1,4 +1,4 @@
-workout_exercises = {
-    'back-squat': 'Back Squat',
-    'front-squat': 'Front Squat'
-}
+workout_exercises = [
+    'Back Squat',
+    'Front Squat'
+]

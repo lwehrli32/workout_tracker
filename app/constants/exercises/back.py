@@ -1,3 +1,3 @@
-workout_exercises = {
-    'deadlift': 'Deadlift'
-}
+workout_exercises = [
+    'Deadlift'
+]

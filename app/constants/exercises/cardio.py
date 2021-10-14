@@ -1,3 +1,3 @@
-workout_exercises = {
-    'run': 'Run'
-}
+workout_exercises = [
+    'Run'
+]

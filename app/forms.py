@@ -1,9 +1,10 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import User
 from app.constants.categories import workout_categories
+from app.workout.manager import Workout_Manager
 
 # fields for registration form
 class RegistrationForm(FlaskForm):
@@ -99,11 +100,17 @@ class UpdateAccountForm(FlaskForm):
 # Form for new workout
 class NewWorkout(FlaskForm):
 
-	# Workout title field
-	title = StringField('Title', validators=[DataRequired(), Length(min=3, max=20)])
-
 	# Workout category
-	categories = SelectField('Categories', choices=workout_categories, validators=[DataRequired()])
+	category = SelectField('Category', choices=workout_categories, validators=[DataRequired()])
+
+	# get exercises based off category
+	wm = Workout_Manager()
+	exercise_list = wm.get_exercises(category)
+
+	sets = IntegerField('Sets', validators=[DataRequired()])
+
+	# Workout title field
+	notes = StringField('Notes', validators=[Length(min=0, max=1000)])
 
 	#create button to create new workout
 	submit = SubmitField('Create Workout')
