@@ -3,7 +3,7 @@ from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import User
-from app.categories import workout_categories
+from app.constants.categories import workout_categories
 
 # fields for registration form
 class RegistrationForm(FlaskForm):
