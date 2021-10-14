@@ -10,7 +10,7 @@ class Workout_Manager:
         self.user_id = user_id
 
     def create_workout(self):
-        return True
+        return False
 
     def get_workouts(self):
         workouts = history.get_history_list(self.user_id)
