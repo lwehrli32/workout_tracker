@@ -1,9 +1,9 @@
-workout_categories = {
-    "Abs": "Abs",
-    "Arms": "Arms",
-    "Back": "Back",
-    "Cardio": "Cardio",
-    "Chest": "Chest",
-    "Legs": "Legs",
-    "Shoulders": "Shoulders"
-}
+workout_categories = [
+    "Abs",
+    "Arms",
+    "Back",
+    "Cardio",
+    "Chest",
+    "Legs",
+    "Shoulders"
+]

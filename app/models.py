@@ -45,9 +45,27 @@ class Workout(db.Model):
 	
 	# workout category
 	category = db.Column(db.String(20), nullable=False)
-	
+
+	# exercise
+	exercise = db.Column(db.String(100), nullable=False)
+
+	# sets
+	sets = db.Column(db.Integer, nullable=False)
+
+	# reps
+	reps = db.Column(db.Integer, nullable=False)
+
+	# weight
+	weight = db.Column(db.Integer, nullable=False)
+
 	# date of workout
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+	#location of workout
+	location = db.Colum(db.String(250))
+
+	# notes of workout
+	notes = db.Column(db.String(1000))
 	
 	# id of user
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
