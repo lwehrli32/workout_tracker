@@ -1,0 +1,26 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}"></link>
+</head>
+
+{% extends "layout.html" %}
+{% block content %}
+	<div>
+		<h1 class="inline">Workout Recorder</h1>
+		<a href="{{ url_for('newWorkout') }}" class="btn btn-outline-info inline newWorkout">{{ newWorkoutTxt }}</a>
+	</div>
+	
+	<div style="padding-top:20px;">
+		<h2>Previous Workouts</h2>
+		<div>
+			{% for workout in workouts %}
+				<hr>
+				<div>
+					<h4>{{ workout.title }}</h4>
+					<p style="float: right; position: relative; top: -35px;">{{ workout.date }}</p>
+					<p><b>Partners:</b> {{ workout.partners }}</p>
+					<p><b>Location:</b> {{ workout.location }}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

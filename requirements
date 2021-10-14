@@ -1,0 +1,6 @@
+flask==2.0.2
+Flask-SQLAlchemy
+flask-bcrypt
+Flask-Login
+Flask-WTF
+email_validator

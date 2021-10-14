@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div>
+		<h1>History</h1>
+	</div>
+	
+	{% for workout in history %}
+		<article class="media content-section">
+		  <div class="media-body">
+		    <div class="article-metadata">
+		      <small class="text-muted">{{ workout.date }}</small>
+		    </div>
+		    <h2><a class="article-title" href="#">{{ workout.category }}</a></h2>
+		    <p class="article-content">Number of exercises: {{ workout.length }}</p>
+		  </div>
+		</article>
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,8 @@
+.inline{
+    display: inline-block;
+}
+
+.newWorkout{
+    float: right;
+    margin: 10px;
+}
