@@ -105,9 +105,24 @@ class NewWorkout(FlaskForm):
 
 	# get exercises based off category
 	wm = Workout_Manager()
-	exercise_list = wm.get_exercises(category)
+	exercise_list = wm.get_all_exercises()
+
+	# add all exercises for all categories
+	abs = SelectField('Exercise', choices=exercise_list[0], validators=[DataRequired()])
+	arms = SelectField('Exercise', choices=exercise_list[1], validators=[DataRequired()])
+	back = SelectField('Exercise', choices=exercise_list[2], validators=[DataRequired()])
+	cardio = SelectField('Exercise', choices=exercise_list[3], validators=[DataRequired()])
+	chest = SelectField('Exercise', choices=exercise_list[4], validators=[DataRequired()])
+	legs = SelectField('Exercise', choices=exercise_list[5], validators=[DataRequired()])
+	shoulders = SelectField('Exercise', choices=exercise_list[6], validators=[DataRequired()])
 
 	sets = IntegerField('Sets', validators=[DataRequired()])
+
+	reps = IntegerField('Reps', validators=[DataRequired()])
+
+	weight = IntegerField('Weight', validators=[DataRequired()])
+
+	location = StringField('Location', validators=[Length(min=0, max=250)])
 
 	# Workout title field
 	notes = StringField('Notes', validators=[Length(min=0, max=1000)])

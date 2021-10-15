@@ -1,12 +1,11 @@
-from os import abort
-
 from app.workout import history
 from app.constants.exercises import abs, arms, back, cardio, chest, legs, shoulders
+
 
 class Workout_Manager:
     user_id = None
 
-    def __init__(self, user_id):
+    def __init__(self, user_id=None):
         self.user_id = user_id
 
     def create_workout(self):
@@ -33,6 +32,13 @@ class Workout_Manager:
             return shoulders.workout_exercises
         else:
             return 'Category not found', 404
+
+    def get_all_exercises(self):
+        all_exercises = [abs.workout_exercises, arms.workout_exercises, back.workout_exercises,
+                         cardio.workout_exercises, chest.workout_exercises, legs.workout_exercises,
+                         shoulders.workout_exercises]
+        return all_exercises
+
 
 class Workout:
     user = None

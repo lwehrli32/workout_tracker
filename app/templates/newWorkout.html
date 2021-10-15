@@ -12,17 +12,87 @@
 
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <div>
-            <b>{{ form.title.label(class="form-control-label") }}</b>
+        <div class="marginTop">
+            <b>{{ form.category.label(class="form-control-label") }}</b>
             <div>
-                {{ form.title(class="form-control form-control-lg") }}
+                {{ form.category(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.abs.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.abs(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.arms.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.arms(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.cardio.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.cardio(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.chest.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.chest(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.legs.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.legs(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.shoulders.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.shoulders(class="form-control form-control-lg") }}
             </div>
         </div>
 
         <div class="marginTop">
-            <b>{{ form.categories.label(class="form-control-label") }}</b>
+            <b>{{ form.sets.label(class="form-control-label") }}</b>
             <div>
-                {{ form.categories(class="form-control form-control-lg") }}
+                {{ form.sets(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop">
+            <b>{{ form.reps.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.reps(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop">
+            <b>{{ form.weight.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.weight(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop">
+            <b>{{ form.location.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.location(class="form-control form-control-lg") }}
+            </div>
+        </div>
+
+        <div class="marginTop exerciseList">
+            <b>{{ form.notes.label(class="form-control-label") }}</b>
+            <div>
+                {{ form.notes(class="form-control form-control-lg") }}
             </div>
         </div>
 

@@ -62,7 +62,7 @@ class Workout(db.Model):
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 	#location of workout
-	location = db.Colum(db.String(250))
+	location = db.Column(db.String(250))
 
 	# notes of workout
 	notes = db.Column(db.String(1000))

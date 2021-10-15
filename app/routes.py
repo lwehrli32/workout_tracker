@@ -30,7 +30,7 @@ def home():
     workouts = []
     wm = Workout_Manager(current_user.id)
 
-    workouts = Workout_Manager.get_workouts(current_user.id)
+    workouts = wm.get_workouts()
 
     return render_template('home.html', title='Home', workouts=workouts, newWorkoutTxt=txt["New Workout"])
 
@@ -161,6 +161,13 @@ def account():
 @login_required
 def newWorkout():
     app.logger.info('Start of newWorkout')
+
+    # creates new user
+    new_workout = Workout(category='Abs', exercise='Russian Twists', sets=1, reps=10, weight=0, location='', notes='', user_id=current_user.id)
+
+    # add user to database
+    db.session.add(new_workout)
+    db.session.commit()
 
     # create workout
     form = NewWorkout()
