@@ -9,9 +9,10 @@ from app.workout.manager import Workout_Manager
 # fields for registration form
 class RegistrationForm(FlaskForm):
 
-	# username field
-	username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
-	
+	first_name = StringField("First Name", validators=[DataRequired()])
+
+	last_name = StringField('Last Name', validators=[DataRequired()])
+
 	# email field
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	
@@ -25,14 +26,14 @@ class RegistrationForm(FlaskForm):
 	submit = SubmitField('Sign Up')
 	
 	# validates the username. Makes sure the username doesn't exist
-	def validate_username(self, username):
+	def validate_email(self, email):
 		
 		# gets the first user from the database with the specified username
-		user = User.query.filter_by(username=username.data).first()
+		user = User.query.filter_by(email=email.data).first()
 		
 		# if the user doesn't exist, throw error
 		if user:
-			raise ValidationError('This username taken. Please choose a different one.')
+			raise ValidationError('There is already an account associated with this email.')
 			
 	# validates the email. Makes sure the email doesn't exist
 	def validate_email(self, email):

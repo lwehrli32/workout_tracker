@@ -17,10 +17,11 @@ class User(db.Model, UserMixin):
 
 	# id column
 	id = db.Column(db.Integer, primary_key=True)
-	
-	# username column
-	username = db.Column(db.String(20), unique=True, nullable=False)
-	
+
+	first_name = db.Column(db.String(320), nullable=False)
+
+	last_name = db.Column(db.String(320), nullable=False)
+
 	# email column
 	email = db.Column(db.String(320), unique=True, nullable=False)
 	
@@ -35,7 +36,7 @@ class User(db.Model, UserMixin):
 	
 	# this is what will be printed out when you query the users table
 	def __repr__(self):
-		return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+		return f"User('{self.email}', '{self.image_file}')"
 
 # workouts table
 class Workout(db.Model):

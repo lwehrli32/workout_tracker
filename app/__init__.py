@@ -25,7 +25,5 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-from app.routes import page_not_found
-app.register_error_handler(404, page_not_found)
 
 from app import routes

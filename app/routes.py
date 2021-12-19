@@ -13,12 +13,6 @@ from app.constants.workout_en import txt
 '''
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    # note that we set the 404 status explicitly
-    return render_template('404_not_found.html'), 404
-
-
 # code for logic on home page
 @app.route("/")
 @app.route("/home")
@@ -51,7 +45,7 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 
         # creates new user
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data, password=hashed_password)
 
         # add user to database
         db.session.add(user)
