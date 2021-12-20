@@ -130,7 +130,8 @@ def account():
     if form.validate_on_submit():
 
         # update data
-        current_user.username = form.username.data
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
         current_user.email = form.email.data
 
         # commit data
@@ -142,7 +143,8 @@ def account():
 
     # checks if the user is going to the page for the first time and populates account info
     elif request.method == 'GET':
-        form.username.data = current_user.username
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
         form.email.data = current_user.email
 
     # get user account picture

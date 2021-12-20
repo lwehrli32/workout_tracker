@@ -63,9 +63,10 @@ class LoginForm(FlaskForm):
 # fields for account info form
 class UpdateAccountForm(FlaskForm):
 
-	# username field
-	username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
-	
+	first_name = StringField("First Name", validators=[DataRequired()])
+
+	last_name = StringField('Last Name', validators=[DataRequired()])
+
 	# email field
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	
@@ -73,13 +74,13 @@ class UpdateAccountForm(FlaskForm):
 	submit = SubmitField('Save')
 	
 	# validates the username. Makes sure the username doesn't exist
-	def validate_username(self, username):
+	def validate_email(self, email):
 		
 		# checks if the current user changed their username
-		if username.data != current_user.username:
+		if email.data != current_user.email:
 		
 			# gets the first user from the database with the specified username
-			user = User.query.filter_by(username=username.data).first()
+			user = User.query.filter_by(username=email.data).first()
 			
 			# if the user doesn't exist, throw error
 			if user:
