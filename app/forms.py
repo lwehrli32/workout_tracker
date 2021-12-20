@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from app.models import User
 from app.constants.categories import workout_categories
 from app.workout.manager import Workout_Manager
+from app.utils import *
 
 # fields for registration form
 class RegistrationForm(FlaskForm):
@@ -103,15 +104,15 @@ class UpdateAccountForm(FlaskForm):
 class NewWorkout(FlaskForm):
 
 	# Workout category
-	category = SelectField('Category', choices=workout_categories, validators=[DataRequired()])
+	category = SelectField('Category', choices=create_tuples(workout_categories), validators=[DataRequired()])
 
 	# get exercises based off category
 	wm = Workout_Manager()
 	exercise_list = wm.get_all_exercises()
 
 	# add all exercises for all categories
-	abs = SelectField('Exercise', choices=exercise_list[0], validators=[DataRequired()])
-	arms = SelectField('Exercise', choices=exercise_list[1], validators=[DataRequired()])
+	abs = SelectField('Exercise', choices=create_tuples(exercise_list[0]), validators=[DataRequired()])
+	arms = SelectField('Exercise', choices=create_tuples(exercise_list[1]), validators=[DataRequired()])
 	back = SelectField('Exercise', choices=exercise_list[2], validators=[DataRequired()])
 	cardio = SelectField('Exercise', choices=exercise_list[3], validators=[DataRequired()])
 	chest = SelectField('Exercise', choices=exercise_list[4], validators=[DataRequired()])

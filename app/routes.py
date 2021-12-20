@@ -26,7 +26,8 @@ def home():
 
     workouts = wm.get_workouts()
 
-    return render_template('home.html', title='Home', workouts=workouts, newWorkoutTxt=txt["New Workout"])
+    image_file = url_for('static', filename='img/' + current_user.image_file)
+    return render_template('home.html', title='Home', workouts=workouts, newWorkoutTxt=txt["New Workout"], image_file=image_file)
 
 
 # logic for register page
@@ -176,12 +177,21 @@ def newWorkout():
         flash('New workout created!', 'success')
         return redirect(url_for('home'))
 
+    image_file = url_for('static', filename='img/' + current_user.image_file)
+
     # return the template
-    return render_template('newWorkout.html', title='New Workout', form=form)
+    return render_template('newWorkout.html', title='New Workout', form=form, image_file=image_file)
 
 
 @app.route("/history")
 @login_required
 def history():
     past_history = get_history_list(current_user)
-    return render_template('history.html', title='History', history=past_history)
+    image_file = url_for('static', filename='img/' + current_user.image_file)
+    return render_template('history.html', title='History', history=past_history, image_file=image_file)
+
+@app.route("/whats_new")
+@login_required
+def whats_new():
+    image_file = url_for('static', filename='img/' + current_user.image_file)
+    return render_template('whats_new.html', title="What's new?", image_file=image_file)

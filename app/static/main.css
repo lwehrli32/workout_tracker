@@ -82,3 +82,19 @@ a.article-title:hover {
 .row{
 	padding-top: 70px;
 }
+
+.side-bar-link:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.side-bar-link{
+  color: #575757;
+}
+
+.account-image{
+  height: 20px;
+  margin-left: 5px;
+  position: relative;
+  top: 10px;
+}

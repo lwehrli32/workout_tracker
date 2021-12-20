@@ -5,7 +5,6 @@ def get_history_list(user_id):
     results = Workout.query.filter_by(user_id=user_id)
 
     try:
-
         for workout in results:
             workouts.append(workout)
     except Exception as e:
