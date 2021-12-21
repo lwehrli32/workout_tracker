@@ -12,15 +12,21 @@
 	<div style="padding-top:20px;">
 		<h2>Previous Workouts</h2>
 		<div>
-			{% for workout in workouts %}
-				<hr>
-				<div>
-					<h4>{{ workout.title }}</h4>
-					<p style="float: right; position: relative; top: -35px;">{{ workout.date }}</p>
-					<p><b>Partners:</b> {{ workout.partners }}</p>
-					<p><b>Location:</b> {{ workout.location }}</p>
+			{% if workouts %}
+				{% for workout in workouts %}
+					<hr>
+					<div>
+						<h4>{{ workout.title }}</h4>
+						<p style="float: right; position: relative; top: -35px;">{{ workout.date }}</p>
+						<p><b>Partners:</b> {{ workout.partners }}</p>
+						<p><b>Location:</b> {{ workout.location }}</p>
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="no-workouts">
+					<p>You have no recent workouts. Time to get moving!</p>
 				</div>
-			{% endfor %}
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}

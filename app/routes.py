@@ -1,8 +1,11 @@
+import secrets
+import os
+from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
 from app.forms import *
 from app.models import User
-from app.workout.manager import Workout_Manager, Workout
+from app.workout.manager import Workout_Manager
 from app.workout.history import *
 from flask_login import login_user, current_user, logout_user, login_required
 from app.constants.workout_en import txt
@@ -24,7 +27,7 @@ def home():
     workouts = []
     wm = Workout_Manager(current_user.id)
 
-    workouts = wm.get_workouts()
+    workouts = wm.get_recent_workouts(5)
 
     image_file = url_for('static', filename='img/' + current_user.image_file)
     return render_template('home.html', title='Home', workouts=workouts, newWorkoutTxt=txt["New Workout"], image_file=image_file)
@@ -120,6 +123,20 @@ def logout():
     return redirect(url_for('login'))
 
 
+def save_picture(pic):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(pic.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static\img', picture_fn)
+
+    output_size = (125, 125)
+    i = Image.open(pic)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+
+    return picture_fn
+
+
 # user account route
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
@@ -129,6 +146,9 @@ def account():
 
     # if the data is valid, update in db
     if form.validate_on_submit():
+        if form.profile_img.data:
+            fname = save_picture(form.profile_img.data)
+            current_user.image_file = fname
 
         # update data
         current_user.first_name = form.first_name.data
@@ -159,21 +179,20 @@ def account():
 def newWorkout():
     app.logger.info('Start of newWorkout')
 
-    # creates new user
-    new_workout = Workout(category='Abs', exercise='Russian Twists', sets=1, reps=10, weight=0, location='', notes='', user_id=current_user.id)
-
-    # add user to database
-    db.session.add(new_workout)
-    db.session.commit()
-
     # create workout
     form = NewWorkout()
 
     if form.validate_on_submit():
+        # creates new user
+        #new_workout = Workout(category='Abs', exercise='Russian Twists', sets=1, reps=10, weight=0, location='',
+                              #notes='', user_id=current_user.id)
 
+        # add user to database
+        #db.session.add(new_workout)
+        #db.session.commit()
 
+        #workout = Workout()
 
-        workout = Workout()
         flash('New workout created!', 'success')
         return redirect(url_for('home'))
 

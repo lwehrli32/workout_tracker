@@ -15,6 +15,9 @@ class Workout_Manager:
         workouts = history.get_history_list(self.user_id)
         return workouts
 
+    def get_recent_workouts(self, time):
+        return []
+
     def get_exercises(self, category):
         if category == 'Abs':
             return abs.workout_exercises

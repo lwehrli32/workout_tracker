@@ -60,7 +60,7 @@ class Workout(db.Model):
 	weight = db.Column(db.Integer, nullable=False)
 
 	# date of workout
-	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+	workout_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 	#location of workout
 	location = db.Column(db.String(250))
