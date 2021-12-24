@@ -1,12 +1,13 @@
 import secrets
 import os
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, make_response, jsonify
 from app import app, db, bcrypt
 from app.forms import *
 from app.models import User
 from app.workout.manager import Workout_Manager
 from app.workout.history import *
+from http import HTTPStatus
 from flask_login import login_user, current_user, logout_user, login_required
 from app.constants.workout_en import txt
 
@@ -101,13 +102,16 @@ def login():
 
             # redirect to page if the next page exists
             if next_page:
+                app.logger.info('Logged in user with redirect')
                 return redirect(next_page)
+
+            app.logger.info("Logged in user without redirect")
 
             # redirect them to the home page
             return redirect(url_for('home'))
         else:
             # bad login. Tell the user to enter new email and password
-            flash('Login unsuccessful. Please check email and password', 'danger')
+            flash('Incorrect username or password', 'danger')
 
     # this will hit if the login was unsuccessful or they just come to the page
     return render_template('login.html', title='Login', form=form)
@@ -184,14 +188,36 @@ def newWorkout():
 
     if form.validate_on_submit():
         # creates new user
+
+        category = form.category.data
+
+        has_exercise = True
+        while has_exercise:
+            exercise = None
+            if category == 'Abs':
+                exercise = form.abs.data
+            elif category == 'Arms':
+                exercise = form.arms.data
+            elif category == 'Back':
+                exercise = form.back.data
+            elif category == 'Cardio':
+                exercise = form.cardio.data
+            elif category == 'Chest':
+                exercise = form.chest.data
+            elif category == 'Legs':
+                exercise = form.legs.data
+            elif category == 'Shoulders':
+                exercise = form.shoulders.data
+            else:
+                return make_response(jsonify({"message": "Bad exercise category", "severity": "Warning"}),
+                                           HTTPStatus.BAD_REQUEST)
+
         #new_workout = Workout(category='Abs', exercise='Russian Twists', sets=1, reps=10, weight=0, location='',
                               #notes='', user_id=current_user.id)
 
         # add user to database
         #db.session.add(new_workout)
         #db.session.commit()
-
-        #workout = Workout()
 
         flash('New workout created!', 'success')
         return redirect(url_for('home'))

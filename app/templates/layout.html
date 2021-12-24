@@ -27,22 +27,25 @@
 	      </button>
 	      <div class="collapse navbar-collapse" id="navbarToggle">
 	        <div class="navbar-nav mr-auto">
-	          <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-	          <a class="nav-item nav-link" href="{{ url_for('history') }}">History</a>
+					{% if current_user.is_authenticated %}
+						<a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+						<a class="nav-item nav-link" href="{{ url_for('history') }}">History</a>
+					{% endif %}
 	        </div>
+
 	        <!-- Navbar Right Side -->
 	        <div class="navbar-nav">
-			  {% if current_user.is_authenticated %}
-			    <a class="nav-item nav-link" href="{{ url_for('account') }}">
-						{{current_user.first_name}} {{ current_user.last_name }}
-					</a>
-					<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
-					<img class="rounded-circle account-image" src="{{ image_file }}"/>
-			  {% else %}
-					<a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
-					<a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
-				{% endif %}
-			</div>
+					{% if current_user.is_authenticated %}
+						<a class="nav-item nav-link" href="{{ url_for('account') }}">
+							{{current_user.first_name}} {{ current_user.last_name }}
+						</a>
+						<a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+						<img class="rounded-circle account-image" src="{{ image_file }}"/>
+					{% else %}
+						<a class="nav-item nav-link" href="{{ url_for('login') }}">Login</a>
+						<a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+					{% endif %}
+					</div>
 	      </div>
 	    </div>
 	  </nav>

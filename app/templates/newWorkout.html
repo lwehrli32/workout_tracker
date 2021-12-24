@@ -5,7 +5,6 @@
 </head>
 
 {% block content %}
-
     <div>
         <h1>New Workout</h1>
     </div>
@@ -13,10 +12,11 @@
 
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        <div class="marginTop" id="category-select">
+
+        <div class="marginTop" id="category-select-div">
             <b>{{ form.category.label(class="form-control-label") }}</b>
             <div>
-                {{ form.category(class="form-control form-control-lg") }}
+                {{ form.category(class="form-control form-control-lg", id="category-select") }}
             </div>
         </div>
 
@@ -27,45 +27,45 @@
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList" id="abs-exercise">
+        <div class="form-group marginTop exerciseList" id="abs-exercise-div">
             <b>{{ form.abs.label(class="form-control-label") }}</b>
             <div>
-                {{ form.abs(class="form-control form-control-lg") }}
+                {{ form.abs(class="form-control form-control-lg", id="abs-exercise") }}
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList" id="arms-exercise">
+        <div class="form-group marginTop exerciseList" id="arms-exercise-div" style="display: none;">
             <b>{{ form.arms.label(class="form-control-label") }}</b>
             <div>
-                {{ form.arms(class="form-control form-control-lg") }}
+                {{ form.arms(class="form-control form-control-lg", id="arms-exercise") }}
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList" id="cardio-exercise">
+        <div class="form-group marginTop exerciseList" id="cardio-exercise-div" style="display: none;">
             <b>{{ form.cardio.label(class="form-control-label") }}</b>
             <div>
-                {{ form.cardio(class="form-control form-control-lg") }}
+                {{ form.cardio(class="form-control form-control-lg", id="cardio-exercise") }}
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList" id="chest-exercise">
+        <div class="form-group marginTop exerciseList" id="chest-exercise-div" style="display: none;">
             <b>{{ form.chest.label(class="form-control-label") }}</b>
             <div>
-                {{ form.chest(class="form-control form-control-lg") }}
+                {{ form.chest(class="form-control form-control-lg", id="chest-exercise") }}
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList" id="legs-exercise">
+        <div class="form-group marginTop exerciseList" id="legs-exercise-div" style="display: none;">
             <b>{{ form.legs.label(class="form-control-label") }}</b>
             <div>
-                {{ form.legs(class="form-control form-control-lg") }}
+                {{ form.legs(class="form-control form-control-lg", id="legs-exercise") }}
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList" id="shoulders-exercise">
+        <div class="form-group marginTop exerciseList" id="shoulders-exercise-div" style="display: none;">
             <b>{{ form.shoulders.label(class="form-control-label") }}</b>
             <div>
-                {{ form.shoulders(class="form-control form-control-lg") }}
+                {{ form.shoulders(class="form-control form-control-lg", id="shoulders-exercise") }}
             </div>
         </div>
 
@@ -90,7 +90,7 @@
             </div>
         </div>
 
-        <div class="form-group marginTop exerciseList">
+        <div class="form-group marginTop">
             <b>{{ form.notes.label(class="form-control-label") }}</b>
             <div>
                 {{ form.notes(class="form-control form-control-lg") }}
@@ -103,9 +103,31 @@
     </form>
 
     <script type="text/javascript">
-        $( "#category-select" ).change(function() {
-            var sel = $("#category-select").val();
-            alert(sel);
+        $('#category-select').on('change', function() {
+          var cats = ["abs", "arms", "back", "cardio", "chest", "legs", "shoulders"];
+
+          var cat = $('#category-select').val();
+
+          for( var i = 0; i <= cats.length; i++){
+            var divName = '#' + cats[i] + '-exercise-div';
+            $(divName).css("display", "none");
+          }
+
+          if (cat == 'Abs'){
+            $('#abs-exercise-div').css("display", "block");
+          }else if (cat == 'Arms'){
+            $('#arms-exercise-div').css("display", "block");
+          }else if(cat == 'Back'){
+            $('#back-exercise-div').css("display", "block");
+          }else if(cat == 'Cardio'){
+            $('#cardio-exercise-div').css("display", "block");
+          }else if(cat == 'Chest'){
+            $('#chest-exercise-div').css("display", "block");
+          }else if(cat == 'Legs'){
+            $('#legs-exercise-div').css("display", "block");
+          }else if (cat == 'Shoulders'){
+            $('#shoulders-exercise-div').css("display", "block");
+          }
         });
     </script>
 {% endblock %}

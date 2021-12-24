@@ -47,18 +47,6 @@ class Workout(db.Model):
 	# workout category
 	category = db.Column(db.String(20), nullable=False)
 
-	# exercise
-	exercise = db.Column(db.String(100), nullable=False)
-
-	# sets
-	sets = db.Column(db.Integer, nullable=False)
-
-	# reps
-	reps = db.Column(db.Integer, nullable=False)
-
-	# weight
-	weight = db.Column(db.Integer, nullable=False)
-
 	# date of workout
 	workout_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
@@ -74,3 +62,21 @@ class Workout(db.Model):
 	# this is what will be printed out when you query the workouts table
 	def __repr__(self):
 		return f"Workout('{self.category}', '{self.date_posted}'"
+
+class Sets(db.Model):
+	set_id = db.Column(db.Integer, primary_key=True)
+
+	# exercise
+	exercise = db.Column(db.String(100), nullable=False)
+
+	# sets
+	sets = db.Column(db.Integer, nullable=False)
+
+	# reps
+	reps = db.Column(db.Integer, nullable=False)
+
+	# weight
+	weight = db.Column(db.Integer, nullable=False)
+
+	# id of user
+	workout_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
